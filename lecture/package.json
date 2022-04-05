@@ -1,0 +1,9 @@
+{
+  "name": "lecture",
+  "version": "1.0.0",
+  "author": "emma",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.6.3"
+  }
+}
