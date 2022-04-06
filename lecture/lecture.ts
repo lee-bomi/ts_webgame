@@ -1,6 +1,6 @@
 const {body} = document;
-let candidate;
-let array = [];
+let candidate: number[];
+let array: number[] = [];
 
 function chooseNumber() {
     candidate = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -30,27 +30,37 @@ form.addEventListener('submit', (e) =>{
     e.preventDefault();
     let answer = input.value;
     if (answer === array.join('')) {    //배열을 문자화
-        result.textContent = '홈런';
+        result.textContent = '홈런이에요~~';
         input.value = '';
         input.focus();
         chooseNumber();
         wrongCount = 0;
-    } else {
+    } else {    //strike, ball,
         let answerArray = answer.split('');
         let strike = 0;
         let ball = 0;
-        wrongCount += 1;
+        wrongCount+=1;
         if (wrongCount > 10) {
-            result.textContent = `10번넘게틀렸네요, 답은 ${array.join('')}입니다`;
+            result.textContent = '글러먹어네요, 답은 ' + array.join('') +' 이에요';
             input.value = '';
             input.focus();
             chooseNumber();
             wrongCount = 0;
         } else {
-            console.log('답이틀리면', answerArray);
             for (let i = 0; i <= 3; i++) {
-
+                if(Number(array[i] == answerArray[i])){
+                    console.log('strike!');
+                    strike+=1;
+                    input.value = '';
+                } else if(array.indexOf(Number(answerArray)) > -1){
+                    console.log('ball!');
+                    ball+=1;
+                    input.value = '';
+                }
             }
+            result.textContent = `strike=${strike}, ball=${ball}입니다`
         }
+
+
     }
 })

@@ -27,28 +27,38 @@ form.addEventListener('submit', function (e) {
     e.preventDefault();
     var answer = input.value;
     if (answer === array.join('')) { //배열을 문자화
-        result.textContent = '홈런';
+        result.textContent = '홈런이에요~~';
         input.value = '';
         input.focus();
         chooseNumber();
         wrongCount = 0;
     }
-    else {
+    else { //strike, ball,
         var answerArray = answer.split('');
         var strike = 0;
         var ball = 0;
         wrongCount += 1;
         if (wrongCount > 10) {
-            result.textContent = "10\uBC88\uB118\uAC8C\uD2C0\uB838\uB124\uC694, \uB2F5\uC740 ".concat(array.join(''), "\uC785\uB2C8\uB2E4");
+            result.textContent = '글러먹어네요, 답은 ' + array.join('') + ' 이에요';
             input.value = '';
             input.focus();
             chooseNumber();
             wrongCount = 0;
         }
         else {
-            console.log('답이틀리면', answerArray);
             for (var i = 0; i <= 3; i++) {
+                if (Number(array[i] == answerArray[i])) {
+                    console.log('strike!');
+                    strike += 1;
+                    input.value = '';
+                }
+                else if (array.indexOf(Number(answerArray)) > -1) {
+                    console.log('ball!');
+                    ball += 1;
+                    input.value = '';
+                }
             }
+            result.textContent = "strike=".concat(strike, ", ball=").concat(ball, "\uC785\uB2C8\uB2E4");
         }
     }
 });
